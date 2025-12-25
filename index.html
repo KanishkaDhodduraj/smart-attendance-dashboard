@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Attendance System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <h2>Attendance</h2>
+    <button onclick="showPage('setup')" id="btnSetup">Setup</button>
+    <button onclick="showPage('daily')" id="btnDaily">Daily Attendance</button>
+    <button onclick="showPage('dashboard')" id="btnDashboard">Attendance %</button>
+  </aside>
+
+  <main class="content">
+    <!-- SETUP PAGE -->
+    <section id="setup" class="page">
+      <h1>Student & Timetable Setup</h1>
+
+      <label>Student Name</label>
+      <input id="studentName" placeholder="Student Name">
+
+      <label>Semester Start Date</label>
+      <input type="date" id="startDate">
+
+      <label>Semester End Date</label>
+      <input type="date" id="endDate">
+
+      <label>Hours per Day</label>
+      <input type="number" id="hoursPerDay" min="1" max="10" value="8">
+
+      <button onclick="buildTimetableGrid()">Build / Update Timetable Grid</button>
+
+      <h2>Weekly Timetable (Mon–Sat)</h2>
+      <div id="timetableGrid" class="tt-grid"></div>
+
+      <button onclick="saveSetup()">Save / Update Setup</button>
+    </section>
+
+    <!-- DAILY ATTENDANCE PAGE -->
+    <section id="daily" class="page hidden">
+      <h1>Daily Attendance</h1>
+
+      <div class="row">
+        <div class="col">
+          <label>Month</label>
+          <select id="monthSelect" onchange="onMonthChange()">
+            <option value="">Select Month</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Select Date</label>
+          <input type="date" id="attendanceDate" onchange="onDateChange()">
+        </div>
+      </div>
+
+      <div id="selectedDayInfo" class="day-info"></div>
+
+      <div id="attendanceContainer"></div>
+
+      <button onclick="saveTodayAttendance()">Save Today</button>
+    </section>
+
+    <!-- DASHBOARD PAGE -->
+    <section id="dashboard" class="page hidden">
+      <h1>Attendance Percentage</h1>
+      <div id="dashboardData"></div>
+    </section>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
